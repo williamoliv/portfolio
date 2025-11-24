@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William de Oliveira | Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* --- VARIABLES & THEME --- */
+        :root {
+            /* Dark Mode (Default - Night on New Queen St) */
+            --bg-color: #1a1c23;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-red: #D9381E; /* Maple Leaf Red */
+            --accent-orange: #F2A900; /* Autumn Gold */
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --card-hover-shadow: rgba(217, 56, 30, 0.2);
+            --toggle-btn-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode (Day on New Queen St) */
+        body.light-mode {
+            --bg-color: #f4f4f6;
+            --glass-bg: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --text-main: #2c3e50;
+            --text-muted: #586473;
+            --card-hover-shadow: rgba(217, 56, 30, 0.15);
+            --toggle-btn-bg: rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- THEME TOGGLE BUTTON --- */
+        .theme-toggle {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: var(--toggle-btn-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            font-size: 1.2rem;
+        }
+        
+        .theme-toggle:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        /* --- BACKGROUND ANIMATION (FALLING LEAVES) --- */
+        .leaf {
+            position: absolute;
+            top: -10%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-red);
+            opacity: 0.3;
+            border-radius: 0 50% 0 50%;
+            animation: fall linear infinite;
+            z-index: -1;
+        }
+        .leaf:nth-child(2n) { background: var(--accent-orange); }
+
+        @keyframes fall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* --- HEADER / HERO --- */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        h1 {
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--accent-red), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 650px;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--card-hover-shadow);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--accent-orange);
+            padding-left: 1rem;
+            color: var(--text-main);
+        }
+
+        /* --- GLASS CARDS (PROJECTS) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-orange);
+            box-shadow: 0 10px 30px var(--card-hover-shadow);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1; /* Pushes buttons to bottom */
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--glass-border);
+            color: var(--text-main);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid transparent;
+        }
+        
+        .card:hover .tech-tag {
+            border-color: var(--accent-red);
+        }
+
+        /* --- NEW BUTTONS FOR CARDS --- */
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Primary Button (Play/Install) */
+        .btn-fill {
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            color: white;
+            border: none;
+        }
+        .btn-fill:hover {
+            box-shadow: 0 5px 15px var(--card-hover-shadow);
+            transform: translateY(-2px);
+        }
+
+        /* Secondary Button (GitHub Code) */
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--accent-orange);
+            color: var(--text-main);
+        }
+        .btn-outline:hover {
+            background: var(--accent-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+
+        /* --- SKILLS --- */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            border: 1px solid var(--accent-red);
+            background: var(--glass-bg);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 2rem;
+        }
+
+        .social-links button, .social-links a {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links button:hover, .social-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 1.5rem; }
+            .theme-toggle { top: 1.5rem; right: 1.5rem; }
+            .card-actions { flex-direction: column; }
+            .btn-small { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="leaves"></div>
+
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Light/Dark Mode">
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <div class="container">
+        <header>
+            <h5 style="color: var(--accent-red); letter-spacing: 2px; margin-bottom: 10px;">HELLO, I AM</h5>
+            <h1>William de Oliveira</h1>
+            <h2>Data Analytics professional transforming complex datasets into actionable insights using Python, AI, and SQL.</h2>
+            
+            <a href="#projects" class="cta-btn">View My Work</a>
+        </header>
+
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <p style="max-width: 800px; line-height: 1.8; color: var(--text-muted);">
+                I am a data analytics professional. My interests span artificial intelligence, machine learning, and software development, with a focus on building practical, scalable solutions. I enjoy exploring new technologies and continuously improving my skills in modern data workflows.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="grid">
+                
+                <div class="card">
+                    <h3><i class="fas fa-gamepad"></i> Priskribu</h3>
+                    <p>
+                        **Priskribu** is an interactive vocabulary game with 20K+ words designed to test and expand your English knowledge in a fun and addictive way.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Game Dev</span>
+                        <span class="tech-tag">English Learning</span>
+                        <span class="tech-tag">Java</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://williamoliv.github.io/Priskribu/" class="btn-small btn-fill" target="_blank">
+                            <i class="fas fa-play"></i> Play Game
+                        </a>
+                        <a href="https://github.com/williamoliv/Priskribu" class="btn-small btn-outline" target="_blank">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fab fa-chrome"></i> Lumenkey - Password Generation</h3>
+                    <p>
+                        A lightweight and efficient **Google Chrome Extension** designed to generate strong, secure, and unique passwords right from your browser.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Chrome Extension</span>
+                        <span class="tech-tag">Security</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://chromewebstore.google.com/detail/lumenkey/agiacemhpdjibiiemgcbojkacofpcilk" class="btn-small btn-fill" target="_blank">
+                            <i class="fas fa-download"></i> Install
+                        </a>
+                        <a href="https://github.com/williamoliv/Lumenkey" class="btn-small btn-outline" target="_blank">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Sanctions Finder (Under Developing)</h3>
+                    <p>
+                        A tools for sanctions searching. Under Developing.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Compliance</span>
+                    </div>
+                    <div class="card-actions">
+                        <a href="https://github.com/williamoliv/AppSanctionsFinder" class="btn-small btn-outline" target="_blank" style="width: 100%; justify-content: center;">
+                            <i class="fab fa-github"></i> View Repository
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-list">
+                <div class="skill-item">Python</div>
+                <div class="skill-item">AI</div>
+                <div class="skill-item">Java</div>
+                <div class="skill-item">SQL</div>1
+                <div class="skill-item">Databricks</div>
+                <div class="skill-item">Data Modeling</div>
+                <div class="skill-item">Machine Learning</div>
+                <div class="skill-item">ETL Processes</div>
+                <div class="skill-item">PostgreSQL</div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/williamoliv" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/williamol" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                
+                <button onclick="revealEmail()" aria-label="Send Email"><i class="fas fa-envelope"></i></button>
+            </div>
+            <br>
+            <p>&copy; 2025 William de Oliveira.</p>
+        </footer>
+    </div>
+
+    <script>
+        /* --- 1. LEAF ANIMATION --- */
+        const leavesContainer = document.getElementById('leaves');
+        const leafCount = 15;
+
+        for (let i = 0; i < leafCount; i++) {
+            const leaf = document.createElement('div');
+            leaf.classList.add('leaf');
+            leaf.style.left = Math.random() * 100 + 'vw';
+            leaf.style.animationDuration = Math.random() * 3 + 5 + 's';
+            leaf.style.animationDelay = Math.random() * 5 + 's';
+            leavesContainer.appendChild(leaf);
+        }
+
+        /* --- 2. LIGHT/DARK MODE TOGGLE --- */
+        // Check local storage for theme preference
+        if (localStorage.getItem('theme') === 'light-mode') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle i').classList.remove('fa-sun');
+            document.querySelector('.theme-toggle i').classList.add('fa-moon');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle i');
+            
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light-mode');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark-mode');
+            }
+        }
+
+        /* --- 3. EMAIL ENCRYPTION --- */
+        function revealEmail() {
+            // We split the email parts here so bots cannot easily scrape it from the raw HTML
+            const user = "williamrod68";
+            const domain = "hotmail.com";
+            
+            // Opens the mail client
+            window.location.href = "mailto:" + user + "@" + domain;
+        }
+    </script>
+</body>
+</html>
