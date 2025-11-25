@@ -8,22 +8,22 @@
     <style>
         /* --- VARIABLES & THEME --- */
         :root {
-            /* Dark Mode (Default - Night on New Queen St) */
+            /* Dark Mode (Default) */
             --bg-color: #1a1c23;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-red: #D9381E; /* Maple Leaf Red */
-            --accent-orange: #F2A900; /* Autumn Gold */
+            --accent-red: #D9381E; 
+            --accent-orange: #F2A900; 
             --text-main: #f0f0f0;
             --text-muted: #a0a0a0;
             --card-hover-shadow: rgba(217, 56, 30, 0.2);
             --toggle-btn-bg: rgba(255, 255, 255, 0.1);
         }
 
-        /* Light Mode (Day on New Queen St) */
+        /* Light Mode */
         body.light-mode {
             --bg-color: #f4f4f6;
-            --glass-bg: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
+            --glass-bg: rgba(255, 255, 255, 0.6);
             --glass-border: rgba(0, 0, 0, 0.05);
             --text-main: #2c3e50;
             --text-muted: #586473;
@@ -43,7 +43,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Native smooth scroll support */
+            scroll-behavior: smooth;
         }
 
         /* --- THEME TOGGLE BUTTON --- */
@@ -71,9 +71,9 @@
             color: var(--accent-orange);
         }
 
-        /* --- NEW: BACK TO TOP BUTTON --- */
+        /* --- BACK TO TOP BUTTON --- */
         #backToTop {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -81,7 +81,7 @@
             background: var(--toggle-btn-bg);
             border: 1px solid var(--glass-border);
             color: var(--text-main);
-            width: 45px; /* Matches theme toggle size */
+            width: 45px; 
             height: 45px;
             border-radius: 50%;
             cursor: pointer;
@@ -99,26 +99,6 @@
             transform: translateY(-3px);
         }
 
-        /* --- BACKGROUND ANIMATION (FALLING LEAVES) --- */
-        .leaf {
-            position: absolute;
-            top: -10%;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-red);
-            opacity: 0.3;
-            border-radius: 0 50% 0 50%;
-            animation: fall linear infinite;
-            z-index: -1;
-        }
-        .leaf:nth-child(2n) { background: var(--accent-orange); }
-
-        @keyframes fall {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.4; }
-            100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
-        }
-
         /* --- LAYOUT --- */
         .container {
             max-width: 1100px;
@@ -127,7 +107,7 @@
             position: relative;
         }
 
-        /* --- HEADER / HERO --- */
+        /* --- HEADER --- */
         header {
             height: 90vh;
             display: flex;
@@ -182,7 +162,7 @@
             color: var(--text-main);
         }
 
-        /* --- GLASS CARDS (PROJECTS) --- */
+        /* --- CARDS --- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -217,7 +197,7 @@
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 1.5rem;
-            flex-grow: 1; /* Pushes buttons to bottom */
+            flex-grow: 1;
         }
 
         .tech-stack {
@@ -240,7 +220,7 @@
             border-color: var(--accent-red);
         }
 
-        /* --- NEW BUTTONS FOR CARDS --- */
+        /* --- CARD BUTTONS --- */
         .card-actions {
             display: flex;
             gap: 10px;
@@ -259,7 +239,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Primary Button (Play/Install) */
         .btn-fill {
             background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
             color: white;
@@ -270,7 +249,6 @@
             transform: translateY(-2px);
         }
 
-        /* Secondary Button (GitHub Code) */
         .btn-outline {
             background: transparent;
             border: 1px solid var(--accent-orange);
@@ -281,7 +259,6 @@
             color: white;
             transform: translateY(-2px);
         }
-
 
         /* --- SKILLS --- */
         .skills-list {
@@ -299,13 +276,36 @@
             font-weight: 500;
         }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER & SPLIT LAYOUT --- */
         footer {
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--text-muted);
             border-top: 1px solid var(--glass-border);
-            margin-top: 2rem;
+            margin-top: 4rem;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            align-items: center;
+            text-align: left;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
         }
 
         .social-links button, .social-links a {
@@ -313,8 +313,7 @@
             border: none;
             cursor: pointer;
             color: var(--text-main);
-            font-size: 1.5rem;
-            margin: 0 1rem;
+            font-size: 1.8rem;
             transition: color 0.3s;
         }
 
@@ -322,13 +321,91 @@
             color: var(--accent-orange);
         }
 
-        /* Mobile Responsiveness */
+        /* --- MINOR GAME WIDGET --- */
+        #ttt-widget {
+            width: 140px;
+        }
+
+        #ttt-widget h5 {
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+        }
+
+        .ttt-cell {
+            background: rgba(255,255,255,0.03);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            color: var(--text-main);
+            border: 1px solid transparent;
+            transition: background 0.2s;
+        }
+
+        body.light-mode .ttt-cell {
+             background: rgba(0,0,0,0.03);
+        }
+
+        .ttt-cell:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        body.light-mode .ttt-cell:hover {
+             background: rgba(0,0,0,0.1);
+        }
+
+        .ttt-cell.winner {
+            background: var(--accent-orange) !important;
+            color: white !important;
+        }
+
+        /* --- ANIMATION --- */
+        .leaf {
+            position: absolute;
+            top: -10%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-red);
+            opacity: 0.3;
+            border-radius: 0 50% 0 50%;
+            animation: fall linear infinite;
+            z-index: -1;
+        }
+        .leaf:nth-child(2n) { background: var(--accent-orange); }
+
+        @keyframes fall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsiveness */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .container { padding: 1.5rem; }
             .theme-toggle { top: 1.5rem; right: 1.5rem; }
             .card-actions { flex-direction: column; }
-            .btn-small { justify-content: center; }
+            
+            .footer-content {
+                flex-direction: column-reverse;
+                gap: 3rem;
+                text-align: center;
+            }
+            .footer-left { align-items: center; }
         }
     </style>
 </head>
@@ -359,64 +436,46 @@
         <section id="projects">
             <h2 class="section-title">Featured Projects</h2>
             <div class="grid">
-                
                 <div class="card">
                     <h3><i class="fas fa-gamepad"></i> Priskribu</h3>
-                    <p>
-                        **Priskribu** is an interactive vocabulary game with 20K+ words designed to test and expand your English knowledge in a fun and addictive way.
-                    </p>
+                    <p>**Priskribu** is an interactive vocabulary game with 20K+ words designed to test and expand your English knowledge in a fun and addictive way.</p>
                     <div class="tech-stack">
                         <span class="tech-tag">Game Dev</span>
                         <span class="tech-tag">English Learning</span>
                         <span class="tech-tag">Java</span>
                     </div>
                     <div class="card-actions">
-                        <a href="https://priskribu.com/" class="btn-small btn-fill" target="_blank">
-                            <i class="fas fa-play"></i> Play Game
-                        </a>
-                        <a href="https://github.com/williamoliv/Priskribu" class="btn-small btn-outline" target="_blank">
-                            <i class="fab fa-github"></i> Code
-                        </a>
+                        <a href="https://priskribu.com/" class="btn-small btn-fill" target="_blank"><i class="fas fa-play"></i> Play Game</a>
+                        <a href="https://github.com/williamoliv/Priskribu" class="btn-small btn-outline" target="_blank"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3><i class="fab fa-chrome"></i> Lumenkey - Password Generation</h3>
-                    <p>
-                        A lightweight and efficient **Google Chrome Extension** designed to generate strong, secure, and unique passwords right from your browser.
-                    </p>
+                    <h3><i class="fab fa-chrome"></i> Lumenkey</h3>
+                    <p>A lightweight and efficient **Google Chrome Extension** designed to generate strong, secure, and unique passwords right from your browser.</p>
                     <div class="tech-stack">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">Chrome Extension</span>
                         <span class="tech-tag">Security</span>
                     </div>
                     <div class="card-actions">
-                        <a href="https://chromewebstore.google.com/detail/lumenkey/agiacemhpdjibiiemgcbojkacofpcilk" class="btn-small btn-fill" target="_blank">
-                            <i class="fas fa-download"></i> Install
-                        </a>
-                        <a href="https://github.com/williamoliv/Lumenkey" class="btn-small btn-outline" target="_blank">
-                            <i class="fab fa-github"></i> Code
-                        </a>
+                        <a href="https://chromewebstore.google.com/detail/lumenkey/agiacemhpdjibiiemgcbojkacofpcilk" class="btn-small btn-fill" target="_blank"><i class="fas fa-download"></i> Install</a>
+                        <a href="https://github.com/williamoliv/Lumenkey" class="btn-small btn-outline" target="_blank"><i class="fab fa-github"></i> Code</a>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3><i class="fas fa-chart-line"></i> Sanctions Finder (Under Developing)</h3>
-                    <p>
-                        A tools for sanctions searching. Under Developing.
-                    </p>
+                    <h3><i class="fas fa-chart-line"></i> Sanctions Finder</h3>
+                    <p>A tool for sanctions searching. Under Development.</p>
                     <div class="tech-stack">
                         <span class="tech-tag">JavaScript</span>
                         <span class="tech-tag">AI</span>
                         <span class="tech-tag">Compliance</span>
                     </div>
                     <div class="card-actions">
-                        <a href="https://github.com/williamoliv/AppSanctionsFinder" class="btn-small btn-outline" target="_blank" style="width: 100%; justify-content: center;">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
+                        <a href="https://github.com/williamoliv/AppSanctionsFinder" class="btn-small btn-outline" target="_blank" style="width: 100%; justify-content: center;"><i class="fab fa-github"></i> View Repository</a>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -436,14 +495,35 @@
         </section>
 
         <footer>
-            <div class="social-links">
-                <a href="https://github.com/williamoliv" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/williamol" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <div class="footer-content">
                 
-                <button onclick="revealEmail()" aria-label="Send Email"><i class="fas fa-envelope"></i></button>
+                <div class="footer-left">
+                    <div class="social-links">
+                        <a href="https://github.com/williamoliv" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/williamol" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <button onclick="revealEmail()" aria-label="Send Email"><i class="fas fa-envelope"></i></button>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2025 William de Oliveira.</p>
+                </div>
+
+                <div class="footer-right">
+                    <div id="ttt-widget">
+                        <h5>William vs You!</h5>
+                        <div class="ttt-board" id="ttt-board">
+                            <div class="ttt-cell" onclick="playMove(0)"></div>
+                            <div class="ttt-cell" onclick="playMove(1)"></div>
+                            <div class="ttt-cell" onclick="playMove(2)"></div>
+                            <div class="ttt-cell" onclick="playMove(3)"></div>
+                            <div class="ttt-cell" onclick="playMove(4)"></div>
+                            <div class="ttt-cell" onclick="playMove(5)"></div>
+                            <div class="ttt-cell" onclick="playMove(6)"></div>
+                            <div class="ttt-cell" onclick="playMove(7)"></div>
+                            <div class="ttt-cell" onclick="playMove(8)"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <br>
-            <p>&copy; 2025 William de Oliveira.</p>
         </footer>
     </div>
 
@@ -455,7 +535,6 @@
         /* --- 1. LEAF ANIMATION --- */
         const leavesContainer = document.getElementById('leaves');
         const leafCount = 15;
-
         for (let i = 0; i < leafCount; i++) {
             const leaf = document.createElement('div');
             leaf.classList.add('leaf');
@@ -466,7 +545,6 @@
         }
 
         /* --- 2. LIGHT/DARK MODE TOGGLE --- */
-        // Check local storage for theme preference
         if (localStorage.getItem('theme') === 'light-mode') {
             document.body.classList.add('light-mode');
             document.querySelector('.theme-toggle i').classList.remove('fa-sun');
@@ -476,9 +554,7 @@
         function toggleTheme() {
             const body = document.body;
             const icon = document.querySelector('.theme-toggle i');
-            
             body.classList.toggle('light-mode');
-            
             if (body.classList.contains('light-mode')) {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
@@ -492,33 +568,169 @@
 
         /* --- 3. EMAIL ENCRYPTION --- */
         function revealEmail() {
-            // We split the email parts here so bots cannot easily scrape it from the raw HTML
             const user = "williamrod68";
             const domain = "hotmail.com";
-            
-            // Opens the mail client
             window.location.href = "mailto:" + user + "@" + domain;
         }
 
-        /* --- 4. NEW: BACK TO TOP LOGIC --- */
+        /* --- 4. BACK TO TOP LOGIC --- */
         let mybutton = document.getElementById("backToTop");
-
-        // When the user scrolls down 300px from the top of the document, show the button
         window.onscroll = function() {scrollFunction()};
-
         function scrollFunction() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                mybutton.style.display = "flex"; // Changed to flex to center the icon
+                mybutton.style.display = "flex";
             } else {
                 mybutton.style.display = "none";
             }
         }
-
-        // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
-    </script>
 
+        /* --- 5. UNBEATABLE TIC TAC TOE (MINIMAX AI) --- */
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X'; 
+        let gameActive = true;
+        const cells = document.querySelectorAll('.ttt-cell');
+
+        const winningConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function playMove(index) {
+            if (board[index] !== '' || !gameActive || currentPlayer === 'O') {
+                return;
+            }
+
+            updateCell(index, 'X');
+            checkResult();
+            
+            if (gameActive) {
+                // Short delay so it feels like thinking
+                setTimeout(computerMove, 200); 
+            }
+        }
+
+        // --- THE UNBEATABLE AI (MINIMAX) ---
+        function computerMove() {
+            if (!gameActive) return;
+
+            let bestScore = -Infinity;
+            let move;
+
+            // Check all empty cells
+            for (let i = 0; i < 9; i++) {
+                if (board[i] === '') {
+                    board[i] = 'O'; // AI makes a move
+                    let score = minimax(board, 0, false); // Check result
+                    board[i] = ''; // Undo move
+                    if (score > bestScore) {
+                        bestScore = score;
+                        move = i;
+                    }
+                }
+            }
+
+            updateCell(move, 'O');
+            checkResult();
+        }
+
+        let scores = {
+            'X': -10, // User wins (bad for AI)
+            'O': 10,  // AI wins (good for AI)
+            'tie': 0
+        };
+
+        function minimax(board, depth, isMaximizing) {
+            let result = checkWinner();
+            if (result !== null) {
+                return scores[result];
+            }
+
+            if (isMaximizing) {
+                let bestScore = -Infinity;
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = 'O';
+                        let score = minimax(board, depth + 1, false);
+                        board[i] = '';
+                        bestScore = Math.max(score, bestScore);
+                    }
+                }
+                return bestScore;
+            } else {
+                let bestScore = Infinity;
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = 'X';
+                        let score = minimax(board, depth + 1, true);
+                        board[i] = '';
+                        bestScore = Math.min(score, bestScore);
+                    }
+                }
+                return bestScore;
+            }
+        }
+
+        function checkWinner() {
+            for (let i = 0; i < winningConditions.length; i++) {
+                const [a, b, c] = winningConditions[i];
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return board[a];
+                }
+            }
+            if (!board.includes('')) {
+                return 'tie';
+            }
+            return null;
+        }
+        // ------------------------------------
+
+        function updateCell(index, player) {
+            board[index] = player;
+            cells[index].innerText = player;
+            cells[index].style.color = player === 'X' ? 'var(--text-main)' : 'var(--accent-orange)';
+        }
+
+        function checkResult() {
+            let result = checkWinner();
+
+            if (result === 'X' || result === 'O') {
+                // Find winning line for highlighting
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    if (board[a] === result && board[b] === result && board[c] === result) {
+                        cells[a].classList.add('winner');
+                        cells[b].classList.add('winner');
+                        cells[c].classList.add('winner');
+                    }
+                }
+                gameActive = false;
+                setTimeout(resetGame, 1500);
+                return;
+            }
+
+            if (result === 'tie') {
+                gameActive = false;
+                setTimeout(resetGame, 1500);
+                return;
+            }
+
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            cells.forEach(cell => {
+                cell.innerText = "";
+                cell.classList.remove('winner');
+                cell.style.color = "var(--text-main)";
+            });
+        }
+    </script>
 </body>
 </html>
