@@ -43,6 +43,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-x: hidden;
+            scroll-behavior: smooth; /* Native smooth scroll support */
         }
 
         /* --- THEME TOGGLE BUTTON --- */
@@ -68,6 +69,34 @@
         .theme-toggle:hover {
             border-color: var(--accent-orange);
             color: var(--accent-orange);
+        }
+
+        /* --- NEW: BACK TO TOP BUTTON --- */
+        #backToTop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            background: var(--toggle-btn-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 45px; /* Matches theme toggle size */
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            font-size: 1.2rem;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            transform: translateY(-3px);
         }
 
         /* --- BACKGROUND ANIMATION (FALLING LEAVES) --- */
@@ -418,6 +447,10 @@
         </footer>
     </div>
 
+    <button onclick="topFunction()" id="backToTop" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         /* --- 1. LEAF ANIMATION --- */
         const leavesContainer = document.getElementById('leaves');
@@ -466,6 +499,26 @@
             // Opens the mail client
             window.location.href = "mailto:" + user + "@" + domain;
         }
+
+        /* --- 4. NEW: BACK TO TOP LOGIC --- */
+        let mybutton = document.getElementById("backToTop");
+
+        // When the user scrolls down 300px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                mybutton.style.display = "flex"; // Changed to flex to center the icon
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
     </script>
+
 </body>
 </html>
