@@ -2,10 +2,11 @@
 :root {
     /* LIGHT MODE (Default - Day) */
     --bg-color: #f4f4f6;
-    --glass-bg: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    /* Frosted glass effect */
     --glass-border: rgba(0, 0, 0, 0.05);
-    --accent-red: #D9381E; 
-    --accent-orange: #F2A900; 
+    --accent-red: #D9381E;
+    --accent-orange: #F2A900;
     --text-main: #2c3e50;
     --text-muted: #586473;
     --card-hover-shadow: rgba(217, 56, 30, 0.15);
@@ -73,7 +74,7 @@ body {
     background: var(--toggle-btn-bg);
     border: 1px solid var(--glass-border);
     color: var(--text-main);
-    width: 45px; 
+    width: 45px;
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
@@ -173,6 +174,24 @@ section {
     flex-direction: column;
 }
 
+.card.wip {
+    background: rgba(100, 100, 100, 0.02);
+    /* Very subtle greyish tint */
+    border-color: rgba(100, 100, 100, 0.15);
+}
+
+.card.wip h3 {
+    color: var(--text-muted);
+    /* Muted title color */
+}
+
+.card.wip .tech-tag:last-child {
+    background: rgba(88, 100, 115, 0.5);
+    /* Lighter grey for the tag */
+    color: white;
+    font-weight: bold;
+}
+
 .card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-orange);
@@ -236,6 +255,7 @@ section {
     color: white;
     border: none;
 }
+
 .btn-fill:hover {
     box-shadow: 0 5px 15px var(--card-hover-shadow);
     transform: translateY(-2px);
@@ -246,6 +266,7 @@ section {
     border: 1px solid var(--accent-orange);
     color: var(--text-main);
 }
+
 .btn-outline:hover {
     background: var(--accent-orange);
     color: white;
@@ -300,7 +321,8 @@ footer {
     gap: 1.5rem;
 }
 
-.social-links button, .social-links a {
+.social-links button,
+.social-links a {
     background: none;
     border: none;
     cursor: pointer;
@@ -309,7 +331,8 @@ footer {
     transition: color 0.3s;
 }
 
-.social-links button:hover, .social-links a:hover {
+.social-links button:hover,
+.social-links a:hover {
     color: var(--accent-orange);
 }
 
@@ -336,7 +359,7 @@ footer {
 
 /* Default (Light Mode) Cells: Slight dark tint to see them against white bg */
 .ttt-cell {
-    background: rgba(0,0,0,0.03); 
+    background: rgba(0, 0, 0, 0.03);
     height: 40px;
     display: flex;
     align-items: center;
@@ -351,15 +374,16 @@ footer {
 }
 
 .ttt-cell:hover {
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /* Dark Mode Overrides for Game */
 body.dark-mode .ttt-cell {
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
 }
+
 body.dark-mode .ttt-cell:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .ttt-cell.winner {
@@ -379,25 +403,130 @@ body.dark-mode .ttt-cell:hover {
     animation: fall linear infinite;
     z-index: -1;
 }
-.leaf:nth-child(2n) { background: var(--accent-orange); }
+
+.leaf:nth-child(2n) {
+    background: var(--accent-orange);
+}
 
 @keyframes fall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-    20% { opacity: 0.4; }
-    100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translate(100px, 100vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Responsiveness */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .container { padding: 1.5rem; }
-    .theme-toggle { top: 1.5rem; right: 1.5rem; }
-    .card-actions { flex-direction: column; }
-    
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    .theme-toggle {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
     .footer-content {
         flex-direction: column-reverse;
         gap: 3rem;
         text-align: center;
     }
-    .footer-left { align-items: center; }
+
+    .footer-left {
+        align-items: center;
+    }
+}
+
+/* --- LOADER --- */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- NEW LOADER (Uiverse.io) --- */
+/* --- NEW LOADER (Scrolling 'william') --- */
+.loader {
+    color: var(--text-main);
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: var(--bg-color);
+    /* Match theme background */
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s;
+    /* Soft shadow instead of strict neumorphism to work in both modes */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+}
+
+.loader::before,
+.loader::after {
+    content: "w i l l i a m";
+    font-size: 30px;
+    font-family: monospace;
+    font-weight: bold;
+    line-height: 1em;
+    height: 1em;
+    width: 1.2ch;
+    /* Approx width for monospaced char + space */
+    text-align: center;
+    outline: 1px solid var(--accent-orange);
+    /* Adaptive outline color */
+    color: transparent;
+    text-shadow: 0 0 0 transparent;
+    overflow: hidden;
+    animation: l4 2s infinite linear;
+}
+
+.loader::before {
+    animation-duration: 4s;
+}
+
+@keyframes l4 {
+    100% {
+        text-shadow: 0 var(--t, -10em) 0 var(--accent-red);
+        /* accent-red for the scrolling text */
+    }
+}
+
+
+/* Loader Hidden State */
+#loader-wrapper.loaded {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* Ensure it doesn't block clicks */
 }

@@ -1,3 +1,12 @@
+// Loading Screen
+window.addEventListener('load', function () {
+    const loader = document.getElementById('loader-wrapper');
+    // Minimal timeout to ensure the animation is seen for at least 800ms
+    setTimeout(() => {
+        loader.classList.add('loaded');
+    }, 800);
+});
+
 /* --- 1. LEAF ANIMATION --- */
 const leavesContainer = document.getElementById('leaves');
 const leafCount = 15;
@@ -21,10 +30,10 @@ if (localStorage.getItem('theme') === 'dark-mode') {
 function toggleTheme() {
     const body = document.body;
     const icon = document.querySelector('.theme-toggle i');
-    
+
     // Toggle the dark-mode class
     body.classList.toggle('dark-mode');
-    
+
     if (body.classList.contains('dark-mode')) {
         // Switch to Sun icon
         icon.classList.remove('fa-moon');
@@ -47,7 +56,7 @@ function revealEmail() {
 
 /* --- 4. BACK TO TOP LOGIC --- */
 let mybutton = document.getElementById("backToTop");
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () { scrollFunction() };
 function scrollFunction() {
     if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         mybutton.style.display = "flex";
@@ -56,12 +65,12 @@ function scrollFunction() {
     }
 }
 function topFunction() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* --- 5. UNBEATABLE TIC TAC TOE (MINIMAX AI) --- */
 let board = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X'; 
+let currentPlayer = 'X';
 let gameActive = true;
 const cells = document.querySelectorAll('.ttt-cell');
 
@@ -78,10 +87,10 @@ function playMove(index) {
 
     updateCell(index, 'X');
     checkResult();
-    
+
     if (gameActive) {
         // Short delay so it feels like thinking
-        setTimeout(computerMove, 200); 
+        setTimeout(computerMove, 200);
     }
 }
 
